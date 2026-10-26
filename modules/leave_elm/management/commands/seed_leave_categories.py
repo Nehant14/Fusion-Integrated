@@ -20,10 +20,12 @@ class Command(BaseCommand):
         for code, name, entitlement, carry_forward, continuous in categories:
             LeaveCategory.objects.update_or_create(
                 code=code,
-                defaults={"name": name,
-                          "annual_entitlement": Decimal(entitlement),
-                          "carry_forward": carry_forward,
-                          "continuous_counting": continuous,
-                          "is_active": True},
+                defaults={
+                    "name": name,
+                    "annual_entitlement": Decimal(entitlement),
+                    "carry_forward": carry_forward,
+                    "continuous_counting": continuous,
+                    "is_active": True,
+                },
             )
         self.stdout.write(self.style.SUCCESS("Leave categories are ready."))
